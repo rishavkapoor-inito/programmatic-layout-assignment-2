@@ -16,7 +16,7 @@ class PlainButtonsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Plain Buttons View"
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         setupUI()
         

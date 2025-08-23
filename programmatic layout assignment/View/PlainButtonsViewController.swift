@@ -8,25 +8,18 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
-    
-//    lazy var label: UILabel = {
-//        let label = UILabel()
-//        label.text = "Ask me anything!"
-//        label.textColor = .white
-//        label.font = .systemFont(ofSize: 30, weight: .bold)
-//        label.textAlignment = .center
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
+class PlainButtonsViewController: UIViewController {
     
     let buttonText = ["C","D","E","F","G","A","B"]
     let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        title = "Plain Buttons View"
         view.backgroundColor = .white
+        
+        setupUI()
+        
         
     }
     

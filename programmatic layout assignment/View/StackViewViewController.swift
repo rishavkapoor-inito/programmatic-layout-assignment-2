@@ -8,15 +8,15 @@
 import UIKit
 import AVFoundation
 
-class StackViewViewController: UIViewController {
+final class StackViewViewController: UIViewController {
     
-    let buttonText = ["C","D","E","F","G","A","B"]
-    let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
+    private let buttonText = ["C","D","E","F","G","A","B"]
+    private let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    let vstack: UIStackView = {
+    private let vstack: UIStackView = {
         let s = UIStackView()
         s.axis = .vertical
         s.alignment = .fill
@@ -46,7 +46,7 @@ class StackViewViewController: UIViewController {
         contentView.addSubview(vstack)
     }
     
-    func setupUI(){
+    private func setupUI(){
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -102,7 +102,7 @@ class StackViewViewController: UIViewController {
         }
     }
     
-    var player: AVAudioPlayer!
+    private var player: AVAudioPlayer!
     @objc func handelPress(_ sender: UIButton){
         let url = Bundle.main.url(forResource: sender.currentTitle!, withExtension: "wav")
         player = try! AVAudioPlayer(contentsOf: url!)

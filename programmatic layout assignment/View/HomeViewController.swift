@@ -9,10 +9,10 @@ import UIKit
 
 
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
-    let plainButton = makeButton(title: "Plain Buttons")
-    let stackButton = makeButton(title: "Stack View")
+    private let plainButton = makeButton(title: "Plain Buttons")
+    private let stackButton = makeButton(title: "Stack View")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
         setupUI()
     }
     
-    func setupUI(){
+    private func setupUI(){
         let vstack = UIStackView(arrangedSubviews: [plainButton, stackButton])
         vstack.axis = .vertical
         vstack.alignment = .fill
@@ -56,9 +56,11 @@ class HomeViewController: UIViewController {
     }
     
     
+    
+    
 }
 
-func makeButton(title: String) -> UIButton {
+private func makeButton(title: String) -> UIButton {
     let b = UIButton(type: .system)
     b.translatesAutoresizingMaskIntoConstraints = false
     b.setTitle(title, for: .normal)
@@ -69,3 +71,5 @@ func makeButton(title: String) -> UIButton {
     b.layer.masksToBounds = true
     return b
 }
+
+

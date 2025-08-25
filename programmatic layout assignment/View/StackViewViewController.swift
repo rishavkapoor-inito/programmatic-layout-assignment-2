@@ -8,12 +8,15 @@
 import UIKit
 import AVFoundation
 
-class StackViewViewController: UIViewController {
+final class StackViewViewController: UIViewController {
     
-    let buttonText = ["C","D","E","F","G","A","B"]
-    let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
+    private let buttonText = ["C","D","E","F","G","A","B"]
+    private let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
     
-    let vstack: UIStackView = {
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
+    private let vstack: UIStackView = {
         let s = UIStackView()
         s.axis = .vertical
         s.alignment = .fill
@@ -25,23 +28,42 @@ class StackViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Stack View"
+        title = "Stack View with scrolling"
         view.backgroundColor = .systemBackground
         
         view.addSubview(vstack)
         
+        setupHierarchy()
         setupUI()
-        
-        
     }
     
-    func setupUI(){
+    private func setupHierarchy() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(vstack)
+    }
+    
+    private func setupUI(){
         
         NSLayoutConstraint.activate([
-            vstack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            vstack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            vstack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            vstack.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor),
+            
+            vstack.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            vstack.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            vstack.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            vstack.bottomAnchor.constraint(lessThanOrEqualTo: contentView.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         
@@ -80,7 +102,7 @@ class StackViewViewController: UIViewController {
         }
     }
     
-    var player: AVAudioPlayer!
+    private var player: AVAudioPlayer!
     @objc func handelPress(_ sender: UIButton){
         let url = Bundle.main.url(forResource: sender.currentTitle!, withExtension: "wav")
         player = try! AVAudioPlayer(contentsOf: url!)

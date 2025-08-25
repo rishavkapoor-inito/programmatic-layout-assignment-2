@@ -8,22 +8,22 @@
 import UIKit
 import AVFoundation
 
-class PlainButtonsViewController: UIViewController {
+final class PlainButtonsViewController: UIViewController {
     
-    let buttonText = ["C","D","E","F","G","A","B"]
-    let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
+    private let buttonText = ["C","D","E","F","G","A","B"]
+    private let colors: [UIColor] = [.systemRed,.systemOrange,.systemYellow,.systemGreen,.systemIndigo,.systemBlue,.systemPurple]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Plain Buttons View"
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         setupUI()
         
         
     }
     
-    func setupUI(){
+    private func setupUI(){
         for (index, text) in buttonText.enumerated() {
             let button = UIButton()
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ class PlainButtonsViewController: UIViewController {
             
         }
     }
-    var player: AVAudioPlayer!
+    private var player: AVAudioPlayer!
     @objc func handelPress(_ sender: UIButton){
         let url = Bundle.main.url(forResource: sender.currentTitle!, withExtension: "wav")
         player = try! AVAudioPlayer(contentsOf: url!)
